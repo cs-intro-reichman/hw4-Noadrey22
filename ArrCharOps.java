@@ -92,7 +92,7 @@ public class ArrCharOps {
      * If no such character is found, returns -1.
      */
     public static int lastIndexOf(char[] arr, char ch) {
-        for (int i = 0; arr.length < i; i++) {
+        for (int i = arr.length - 1; i >= 0; i--) {
             if (arr[i] == ch) {
                 return i;
             }
@@ -147,10 +147,11 @@ public class ArrCharOps {
     public static long hashCode(char[] arr) {
         int sum = 0;
         for (int i = 0; i < arr.length; i++) {
-            sum += arr[i] * Math.pow(7, (arr.length - 1) + 1);
+            sum += arr[i] * Math.pow(7, (arr.length - 1) - i);
         }
 
         return sum;
+
     }
 
     /**
@@ -183,7 +184,25 @@ public class ArrCharOps {
      *         return -2 if there is an error with the input.
      */
     public static int compareTo(String str1, String str2) {
-        // Replace the following statement with your code
+        if ((str1 == "") || (str2 == "")) {
+            return -2;
+        }
+        if (str1.equals(str2)) {
+            return 0;
+        }
+        int minLength = Math.min(str1.length(), str2.length());
+        for (int i = 0; i < minLength; i++) {
+            if (str1.charAt(i) > str2.charAt(i)) {
+                return 1;
+            } else if (str1.charAt(i) < str2.charAt(i)) {
+                return -1;
+            }
+        }
+        if (str1.length() > str2.length()) {
+            return 1;
+        } else if (str1.length() < str2.length()) {
+            return -1;
+        }
         return 0;
     }
 }
